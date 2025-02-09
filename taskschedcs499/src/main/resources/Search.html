@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appointment Search</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2em;
+      background: #f5f5f5;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 1.5em;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    .search-form {
+      margin-bottom: 2em;
+    }
+    .search-form label {
+      display: block;
+      margin-top: 0.5em;
+    }
+    .search-form input {
+      width: 100%;
+      padding: 0.5em;
+      margin-top: 0.25em;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    .search-form button {
+      margin-top: 1em;
+      padding: 0.75em;
+      width: 100%;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .search-form button:hover {
+      background: #0056b3;
+    }
+    .results {
+      margin-top: 2em;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 1em;
+      margin-bottom: 1em;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+    .loading, .error {
+      text-align: center;
+      padding: 1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Search Appointments</h1>
+    
+    <!-- Search Form -->
+    <form id="searchForm" class="search-form" method="get">
+      <label for="appoint">Appointment Name:</label>
+      <input type="text" id="appoint" name="appoint" placeholder="Appointment Name">
+      
+      <label for="name">Appointee Name:</label>
+      <input type="text" id="name" name="name" placeholder="Appointee Name">
+      
+      <label for="dsp">Description:</label>
+      <input type="text" id="dsp" name="dsp" placeholder="Description">
+      
+      <label for="datetime">Date and Time:</label>
+      <input type="datetime-local" id="datetime" name="datetime">
+      
+      <button type="submit">Search</button>
+    </form>
+    
+    <!-- Div to Display Results -->
+    <div id="results" class="results"></div>
+  </div>
+  
+  <!-- Ok well it looks better here need to add pagination options for the end user-->
+  
+  <script>
+	document.getElementById('searchForm').addEventListener('submit', function(event) {
+	    event.preventDefault();
+	    
+	    const appoint = document.getElementById('appoint').value.trim();
+	    const name = document.getElementById('name').value.trim();
+	    const dsp = document.getElementById('dsp').value.trim();
+	    const datetime = document.getElementById('datetime').value;
+
+	    const params = new URLSearchParams();
+	    if (appoint) params.append('appoint', appoint);
+	    if (name) params.append('name', name);
+	    if (dsp) params.append('dsp', dsp);
+	    if (datetime) params.append('datetime', datetime);
+
+	    const url = `/search/query?${params.toString()}`;  // 
+	    console.log("Fetching URL:", url);  // Debugging log
+
+	    fetch(url)
+	    .then(response => response.json())
+	    .then(data => {
+	        console.log("Received data:", data);
+	        const resultsDiv = document.getElementById('results');
+	        resultsDiv.innerHTML = '';
+
+	        if (data.length === 0) {
+	            resultsDiv.innerHTML = '<p>No Appointments found.</p>';
+	        } else {
+	            data.forEach(appointment => {
+	                const appointmentDiv = document.createElement('div');
+	                appointmentDiv.classList.add('appointment');
+	                appointmentDiv.innerHTML = `
+	                <h3>${appointment.appoint || 'No Title'}</h3>
+	                <p><strong>Appointee:</strong> ${appointment.name || 'N/A'}</p>
+	                <p><strong>Description:</strong> ${appointment.dsp || 'N/A'}</p>
+	                <p><strong>Date and Time:</strong> ${appointment.datetime ? new Date(appointment.datetime).toLocaleString() : 'N/A'}</p>
+	                `;
+	                resultsDiv.appendChild(appointmentDiv);
+	            });
+	        }
+	    })
+	    .catch(error => {
+	        console.error("Error fetching search results:", error); //TODO: When it can't find it it is currently not showing the a proper error message instead token 'N' not valid JSON'
+	        document.getElementById('results').innerHTML = `<p>Error: ${error.message}</p>`;
+	    });
+	});
+
+  </script>
+</body>
+</html>
+
