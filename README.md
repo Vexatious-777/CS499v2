@@ -14,7 +14,7 @@ I decided to try and use Quarkus a Java framework that is meant to assist develo
 Not entirely neccessary in this case but I though it would be interesting to play with modern tools, while creating something that could potentially be used within the context
 of a cloud-based environment.
 
-The primary aims of this application are as follows:
+# The primary aims of this application are as follows:
 # 1. Enable a user to create an appointment.
 # 2. Enable an administrator user to sort the appointments
 # 3. Enable the software to store these appointments using a database.
@@ -22,7 +22,7 @@ The primary aims of this application are as follows:
 (RBAC security is the current plan... still under development at this time 2/11/2025)
 # 5. Provide security features to ensure only authorized admin users are able to search appointments.
 
-Bonus Aims:
+# Bonus Aims:
 # Enable users to submit CSV files for mass appointment additions to the database.
 # Enable admin users to sort appointments based on multiple factors 
 # be alerted when appointments conflict with one another and ask for admin priority sorting.
