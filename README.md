@@ -25,5 +25,5 @@ of a cloud-based environment.
 # Bonus Aims:
 # Enable users to submit CSV files for mass appointment additions to the database.
 # Enable admin users to sort appointments based on multiple factors 
-# be alerted when appointments conflict with one another and ask for admin priority sorting.
+# Alert when appointments conflict with one another and ask for administrator clarification.
 # Prettier webpages????
