@@ -13,7 +13,7 @@ public class Form {
 	@GET
 	@Produces(MediaType.TEXT_HTML)
 	public String getForm() throws Exception {
-		return Files.readString(Paths.get("src/main/resources/form.html"));
+		return Files.readString(Paths.get("src/main/resources/META-INF/resources/form.html"));
 	}
 
 }

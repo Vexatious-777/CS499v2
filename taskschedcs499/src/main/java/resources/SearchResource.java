@@ -4,7 +4,21 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import models.Appointment;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
+import jakarta.annotation.security.DenyAll;
+import jakarta.annotation.security.PermitAll;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.InternalServerErrorException;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.SecurityContext;
+import org.eclipse.microprofile.jwt.Claim;
+import org.eclipse.microprofile.jwt.Claims;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,16 +31,21 @@ import Repository.AppointmentRepository;
  * */
 
 @Path("/search")
+//@RolesAllowed({"User", "Admin"})
 public class SearchResource {
+	
+	@Inject
+	JsonWebToken jwtWebToken;
 	
 	@Inject
 	AppointmentRepository appointmentRepository;
 	
 	@GET
 	@Path("/file")
+	//@RolesAllowed({"User", "Admin"})
 	@Produces(MediaType.TEXT_HTML)
 	public String getSearch() throws Exception {
-		return Files.readString(Paths.get("src/main/resources/Search.html"));
+		return Files.readString(Paths.get("src/main/resources/META-INF/resources/Search.html"));
 	}
 	
 	@GET

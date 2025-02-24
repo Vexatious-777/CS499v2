@@ -1,0 +1,161 @@
+<!--In need of a makeover to match search page
+Also, need to figure out the best way to enable CSV file upload support-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width-device-width, initial-scale-1.0">
+	<title>Appointment Form</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 2em;
+			background: #f5f5f5;
+		}
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			background: #fff;
+			padding: 1.5em;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.1);
+		}
+		h1 {
+			text-align: center;
+			font-weight: bold;
+			color: purple;
+		}
+		.form-group {
+			margin-bottom: 1em;
+		}
+		label {
+			display: block;
+			font-weight: bold;
+			margin-bottom: 0.25em;
+		}
+		input, textarea {
+			width: 100%;
+			padding: 0.5em;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+		}
+		textarea {
+			resize: vertical;
+			height: 100px;
+		}
+		button {
+			margin-top: 1em;
+			padding: 0.75em;
+			width: 100%;
+			background: #007BFF;
+			color: #fff;
+			border: none;
+			border-radius: 3px;
+			cursor: pointer;
+			font-size: 1em;
+		}
+		button:hover {
+			background: #0056b3;
+		}
+		</style>
+	</head>
+	</body>
+	<!-- Single Appointment Form -->
+	<div class="containter">
+		<h1>Appointment Details Form</h1>
+		<p> Legal Eagle Eye: Your Local Executors</p>
+		
+		<form id ="appointmentForm" method="post">
+			<div class="form-group">
+				<label for="appoint">Appointment:</label>
+				<input type="text" id="appoint" name="appoint" required>
+			</div>
+				
+			<div class="form-group">
+				<label for="name">Name:</label>
+				<input type="text" id="name" name="name" required>
+			</div>
+			
+			<div class="form-group">
+				<label for="dsp">Description:</label>
+				<input type="text" id="dsp" name="dsp" required>
+			</div>
+			
+			<div class="form-group">
+				<label for="datetime">Date and Time:</label>
+				<input type="datetime-local" id="datetime" name="datetime" required>
+			</div>
+			
+			<button type="submit">Submit</button>
+		</form>
+	</div>
+	
+	<!--Upload Form-->
+		<form id="csvUploadForm" enctype="multipart/form-data">
+		<div class="form-group">
+			<label for="csvFile">Upload CSV:</label>
+			<input type="file" id="csvFile" name="csvFile" accept=".csv" required>
+		</div>	
+		<button type="submit">Upload CSV</button>
+		</form>
+	</div>
+				
+					
+	
+	<script>
+		document.getElementById("appointmentForm").addEventListener("submit", async function(event) {
+			event.preventDefault();
+			
+			const formData = new FormData(event.target);
+			const jsonData = Object.fromEntries(formData.entries());
+			
+			if (jsonData.datetime) {
+				try{
+					jsonData.datetime = new Date(jsonData.datetime).toISOString();
+				} catch (error) {
+				console.error("Invalid date", jsonData.datetime, error);
+				alert("Let's go again.")
+				return;
+				}
+			}
+			console.log("Submitting JSON:", jsonData);
+			
+			const response = await fetch("/api/appointments", {
+				method: "POST",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify(jsonData)
+			});
+			
+			console.log("Server Response:", response)
+			
+			if (response.ok){
+				alert("Appointment Made!");
+				event.target.reset();
+			} else {
+				alert("Failed: Reschedule?");
+			}
+		});
+		
+		// CSV file upload script
+		document.getElementById("csvUploadForm").addEventListener("submit", async function(event) {
+			event.preventDefault();
+			
+			const fileInput = document.getElementById("csvFile");
+			const formData = new FormData();
+			formData.append("file", fileInput.files[0]);
+			
+			//send to backend
+			const response = await fetch("/api/appointments/upload-form", {
+				method: "POST",
+				body: formData
+			});
+			
+			if (response.ok) {
+			alert("CSV uploaded and appointments added to database");
+		} else {
+			alert("Upload failed");
+		}
+		});
+		</script>
+</body>
+</html>

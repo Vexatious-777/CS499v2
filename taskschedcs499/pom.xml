@@ -28,7 +28,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
+<!-- Rest Easy is not currently used hopefully not an issue-->
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -59,75 +59,120 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
+       </dependency>
+       <dependency>
     		<groupId>org.projectlombok</groupId>
     		<artifactId>lombok</artifactId>
     		<version>1.18.36</version>
     		<scope>provided</scope>
-		</dependency>
-		<dependency>
+	</dependency>
+	<dependency>
 		<groupId>io.quarkus</groupId>
 		<artifactId>quarkus-qute</artifactId>
-		</dependency>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-csv</artifactId>
+		<version>1.8</version>
+	</dependency>
+	<dependency>
+    	<groupId>io.quarkus</groupId>
+    	<artifactId>quarkus-smallrye-jwt</artifactId>
+	</dependency>
+	<dependency>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-smallrye-jwt-build</artifactId> 
+    </dependency>
+    <dependency>
+    	<groupId>io.quarkus</groupId>
+    	<artifactId>quarkus-security</artifactId>
+	</dependency>
+	<dependency>
+	<groupId>at.favre.lib</groupId>
+	<artifactId>bcrypt</artifactId>
+	<version>0.9.0</version>
+	</dependency>
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-test-mongodb</artifactId>
+    <scope>test</scope>
+</dependency>
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>${quarkus.platform.group-id}</groupId>
-                <artifactId>quarkus-maven-plugin</artifactId>
-                <version>${quarkus.platform.version}</version>
-                <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>generate-code</goal>
-                            <goal>generate-code-tests</goal>
-                            <goal>native-image-agent</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${compiler-plugin.version}</version>
-                <configuration>
-                    <parameters>true</parameters>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire-plugin.version}</version>
-                <configuration>
-                    <systemPropertyVariables>
-                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                        <maven.home>${maven.home}</maven.home>
-                    </systemPropertyVariables>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${surefire-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <systemPropertyVariables>
-                        <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
-                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                        <maven.home>${maven.home}</maven.home>
-                    </systemPropertyVariables>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <plugins>
+        <plugin>
+            <groupId>${quarkus.platform.group-id}</groupId>
+            <artifactId>quarkus-maven-plugin</artifactId>
+            <version>${quarkus.platform.version}</version>
+            <extensions>true</extensions>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>build</goal>
+                        <goal>generate-code</goal>
+                        <goal>generate-code-tests</goal>
+                        <goal>native-image-agent</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${compiler-plugin.version}</version>
+            <configuration>
+                <parameters>true</parameters>
+            </configuration>
+        </plugin>
+        <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${surefire-plugin.version}</version>
+            <configuration>
+                <systemPropertyVariables>
+                    <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                    <maven.home>${maven.home}</maven.home>
+                </systemPropertyVariables>
+            </configuration>
+        </plugin>
+        <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${surefire-plugin.version}</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>integration-test</goal>
+                        <goal>verify</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <systemPropertyVariables>
+                    <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
+                    <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                    <maven.home>${maven.home}</maven.home>
+                </systemPropertyVariables>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>java</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+
 
     <profiles>
         <profile>
