@@ -1,3 +1,47 @@
+# Professional Self-Assessment
+
+ I think that completing my coursework throughout the program and developing my ePortfolio has helped me showcase my strengths as well as shape my professional goals and values
+ , and prepare me to enter the computer science field. By showing my ability to research new methods and tools and to not be afraid to use them. It has also shown me how valuable
+ within the professional sphere mentors and outside help will be since I feel as if I had team members working beside me it may have helped me to be able to ask for their input
+ on some of my challenges during development. Which I believe to be a strength and not a weakness when someone is able to realize that a helping hand is exactly what is needed
+ to get the job done.
+ 
+ This leads me to the following topics of 
+ Collaborating in a team environment: When it comes to the idea of collaborating within a team environment, I am actually excited to eventually work alongside other developers
+ on a project. This mainly due to the fact that almost the entirety of my courseload as been me working on my course workload alone and would love the ability to chat with some-
+ one else about Software development in-person! I am also a man with little ego and would love to actually have my work critqued, that way I can learn faster from someone with
+ more experience.
+ 
+ Communicating with stakeholders: Communicating with stakeholders is a concept that has been covered during my courseload but it still feels like an alien experience but one
+ I am excited to experience at some point. Though I won't lie and say that I am going to love rejecting their ideas once the scope of the project could potentially be blown
+ out of proportion due to potential add ons they feel are neccessary.
+ 
+ Data structures and algorithms: Data Structures and algorithms seem to be the ever present companion of computer scientists and do make up the majority of computer applications
+ since Data structures are how the data is saved and used in the future such as: Lists,Arrays, and HashMaps. While Algorithms are the instructions that are fed to the computer
+ to ensure that it does exactly what you want it to do. However, it takes breaking down those instructions into a language it can understand to make those instructions usable.
+ Software engineering and database: Software engineering is the concept of creating a system based of multiple lines of code to create an entire instruction set for a computer.
+ This instruction set could be alot of different things such as: office tools(e.g. Word Processors, Spreadsheets, etc.), A/V editing tools, video games, etc.
+ Databases are the digital manifestion of records stored under different forms of organization usually a schema that details what it can be expected to be filled with.
+ For example, if a database is meant to hold information in connection to music it might have a series of fields like so: "Artist", "Genre", "Album", "Song Name". Also most
+ databases are meant to be searchable and use those fields to filter and provide the relevant data back to the user. Of which I most familar with MongoDB.
+ 
+ Security: Security is becoming extremly important within the modern field of software engineering. It is a skill that I need to grow in the most I feel. However, I am aware
+ that with the proper care when developing some software and thinking ahead. A developer can premptivley tackle this by developing with common exploits in mind like making sure to
+ store senstive data in an encrypted format. Not using tools with known exploits or instead updating them to the most current version if those exploits have been removed.
+ As well as staying up-to-date with security trends.
+
+ My artifact should show you that I still have a lot to learn but that with the right work environment, I will be an employee that will grow and become strong addition to the team
+ and a solid investment. It shows that I will research and take advantage of modern tools and features. While also not being afraid to try new things during development. It
+ also shows that I can at times bite off more than I can chew but ambition is better than stagnancy.
+ The artifact itself is a java based appointment service web application, that takes advantage of MongoDB for database needs and uses Quarkus as a framework tool.
+ It was initially just a series of jUnit test cases, that I wanted to blow up into a full-fledged full-stack application but I was not able to fully get there at the time
+ of my current due date. I do plan to continue it's development. Having said that though the Database integration works flawlessly and so does the back-end logic for querying
+ the database for users and appointments. However, the security features do not fully work it is able to realize a proper log-in from a user within the database and accept new
+ users through the registration page but the pages do not link to one another correctly and my JWTs might not be working as intended due to them not being passed as an authorization header
+ if my error logs are to be believed.
+
+
+
 # CS499v2
 The first attempt at CS499 was a try at using gradle as a build tool. It led to a few conflicts that I could not resolve,
 So, I swapped to Maven due to my familiarity with it in previous course material. (That's why I have two cs499 repo's)
