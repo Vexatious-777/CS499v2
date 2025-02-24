@@ -58,7 +58,8 @@ I decided to try and use Quarkus a Java framework that is meant to assist develo
 Not entirely neccessary in this case but I though it would be interesting to play with modern tools, while creating something that could potentially be used within the context
 of a cloud-based environment.
 
-#i .Informal Code Review:
+# i .Informal Code Review:
+(Youtube link to be added later)
 
 # ii. Narratives and Core Artifact:
  
