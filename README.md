@@ -108,7 +108,12 @@ of a cloud-based environment.
  5. Provide security features to ensure only authorized admin users are able to search appointments. (In progress)
 
 Bonus Aims:
+
 Enable users to submit CSV files for mass appointment additions to the database. (Completed)
+
 Enable admin users to sort appointments based on multiple factors (In Progress)
+
 Alert when appointments conflict with one another and ask for administrator clarification. (In Progess)
+
 Prettier webpages???? (In Progress)
+
